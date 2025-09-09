@@ -1,0 +1,43 @@
+groups:
+- name: trading-health
+  rules:
+  - alert: UnrealizedPnLTooLow
+    expr: pnl_intraday < -100
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "PnL below threshold"
+      description: "pnl_intraday < -100 for 5m"
+  - alert: VoterNoRulesPassed
+    expr: avg_over_time(voter_rules_passed[10m]) == 0
+    for: 0m
+    labels:
+      severity: warning
+    annotations:
+      summary: "No rules passed in 10m"
+      description: "voter_rules_passed averaged zero over 10 minutes"
+  - alert: FeaturesNaNHigh
+    expr: avg_over_time(features_nan_rate[5m]) > 0.1
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High NaN rate in features"
+      description: "features_nan_rate > 0.1 for 5m"
+  - alert: FundamentalsMissing
+    expr: fundamentals_missing_fields > 0
+    for: 0m
+    labels:
+      severity: info
+    annotations:
+      summary: "Fundamentals missing for symbol"
+      description: "At least one fundamentals field missing"
+  - alert: OrderLatencyHigh
+    expr: avg_over_time(orders_latency_ms[5m]) > 1500
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Order placement latency high"
+      description: "orders_latency_ms average > 1500ms over 5m"

@@ -1,0 +1,88 @@
+{
+  "title": "Symbol Details",
+  "timezone": "browser",
+  "templating": {
+    "list": [
+      {
+        "type": "query",
+        "name": "symbol",
+        "label": "Symbol",
+        "datasource": "${DS_PROMETHEUS}",
+        "refresh": 1,
+        "query": "label_values(voter_signal, symbol)",
+        "multi": false,
+        "includeAll": false
+      }
+    ]
+  },
+  "panels": [
+    {
+      "type": "graph",
+      "title": "Signal (-1/0/1)",
+      "id": 11,
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "voter_signal{symbol=~\"$symbol\"}"
+        }
+      ]
+    },
+    {
+      "type": "graph",
+      "title": "PnL",
+      "id": 12,
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "voter_pnl{symbol=~\"$symbol\"}"
+        }
+      ]
+    },
+    {
+      "type": "graph",
+      "title": "Rules Evaluated",
+      "id": 13,
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "voter_rules_evaluated{symbol=~\"$symbol\"}"
+        }
+      ]
+    },
+    {
+      "type": "graph",
+      "title": "Rules Passed",
+      "id": 14,
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "voter_rules_passed{symbol=~\"$symbol\"}"
+        }
+      ]
+    },
+    {
+      "type": "graph",
+      "title": "Fundamentals Missing",
+      "id": 15,
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "fundamentals_missing_fields{symbol=~\"$symbol\"}"
+        }
+      ]
+    },
+    {
+      "type": "graph",
+      "title": "Features NaN Rate (global)",
+      "id": 16,
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "features_nan_rate"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 39,
+  "version": 1
+}
