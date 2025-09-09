@@ -1,0 +1,7 @@
+
+backtest:
+  spread_bps: 1.0        # 模拟买卖价差（双边一半）
+  slippage_bps: 1.0      # 固定滑点
+  slippage_atr_mult: 0.1 # 随ATR的动态滑点系数
+  bars: 3000             # 历史回放K线数量
+  mode: 'long_only'      # 暂仅支持 long_only
