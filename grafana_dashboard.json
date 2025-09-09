@@ -1,0 +1,13 @@
+{
+  "panels": [
+    {
+      "type": "graph",
+      "title": "Voter Score per Symbol",
+      "id": 99,
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        { "expr": "voter_score{symbol=~\"$symbol\"}" }
+      ]
+    }
+  ]
+}
